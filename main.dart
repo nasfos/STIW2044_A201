@@ -61,6 +61,7 @@ class MyWidget extends StatefulWidget {
 
 class _MyWidgetState extends State<MyWidget> {
   int _radioValue = 0;
+  // int _radioValue2 = 0;
   final TextEditingController _weightcontroller = new TextEditingController();
   final TextEditingController _heightcontroller = new TextEditingController();
   double weight = 0.0,
@@ -69,7 +70,6 @@ class _MyWidgetState extends State<MyWidget> {
       resultjames = 0.0,
       resulthume = 0.0;
   String lbmb, lbmj, lbmh;
-  // bool _validate = false;
 
   @override
   Widget build(BuildContext context) {
@@ -98,6 +98,27 @@ class _MyWidgetState extends State<MyWidget> {
               ],
             ),
           ),
+          // Padding(
+          //   padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
+          //   child: Row(
+          //     children: [
+          //       Text("Age 14 or younger? "),
+          //       //Expanded(child: TextField())
+          //       Radio(
+          //         value: 0,
+          //         groupValue: _radioValue2,
+          //         onChanged: _handleRadioValueChange2,
+          //       ),
+          //       Text("Yes"),
+          //       Radio(
+          //         value: 1,
+          //         groupValue: _radioValue2,
+          //         onChanged: _handleRadioValueChange2,
+          //       ),
+          //       Text("No"),
+          //     ],
+          //   ),
+          // ),
           Padding(
             padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
             child: Row(
@@ -108,8 +129,9 @@ class _MyWidgetState extends State<MyWidget> {
                   keyboardType: TextInputType.numberWithOptions(),
                   controller: _heightcontroller,
                   // decoration: InputDecoration(
-                  //   errorText: _validate ? 'Value Can\'t Be Empty' : null,
+                  //   errorText: _validate ? null:"Value Can\'t Be Empty",
                   // ),
+                  // controller:_heightcontroller,
                 ))
               ],
             ),
@@ -155,36 +177,43 @@ class _MyWidgetState extends State<MyWidget> {
           // Text("James: $lbmj"),
           // Text("Hume: $lbmh"),
           Container(
-          child: DataTable (
-            columns: const <DataColumn>[
-              DataColumn(
-                label: Text(
-                  'Formula',
-                  style: TextStyle(fontStyle: FontStyle.italic),
+            child: DataTable(
+              columns: const <DataColumn>[
+                DataColumn(
+                  label: Text(
+                    'Formula',
+                    style: TextStyle(fontStyle: FontStyle.italic),
+                  ),
                 ),
-              ),
-              DataColumn(
-                label: Text(
-                  'Lean Body Mass',
-                  style: TextStyle(fontStyle: FontStyle.italic),
+                DataColumn(
+                  label: Text(
+                    'Lean Body Mass',
+                    style: TextStyle(fontStyle: FontStyle.italic),
+                  ),
                 ),
-              ),
-            ],
-            rows: <DataRow>[
-              DataRow(cells: <DataCell>[
-                DataCell(Text("Boer")),
-                DataCell(Text("$lbmb")),
-              ],),
-              DataRow(cells: <DataCell>[
-                DataCell(Text("James")),
-                DataCell(Text("$lbmj")),
-              ],),
-              DataRow(cells: <DataCell>[
-                DataCell(Text("Hume")),
-                DataCell(Text("$lbmh")),
-              ],),
-            ],
-          ),)
+              ],
+              rows: <DataRow>[
+                DataRow(
+                  cells: <DataCell>[
+                    DataCell(Text("Boer")),
+                    DataCell(Text("$lbmb")),
+                  ],
+                ),
+                DataRow(
+                  cells: <DataCell>[
+                    DataCell(Text("James")),
+                    DataCell(Text("$lbmj")),
+                  ],
+                ),
+                DataRow(
+                  cells: <DataCell>[
+                    DataCell(Text("Hume")),
+                    DataCell(Text("$lbmh")),
+                  ],
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );
@@ -202,7 +231,7 @@ class _MyWidgetState extends State<MyWidget> {
         weight = 0;
       } else if (_heightcontroller.text.isEmpty &&
           _weightcontroller.text.isNotEmpty) {
-        height = 0;
+        // height = 0;
       } else {
         // _heightcontroller.text.isEmpty ? _validate = true : _validate = false;
         // _weightcontroller.text.isEmpty ? _validate = true : _validate = false;
@@ -240,11 +269,16 @@ class _MyWidgetState extends State<MyWidget> {
       lbmb = "null";
       lbmh = "null";
       lbmj = "null";
-      
     });
   }
 
   String format(double n) {
     return n.toStringAsFixed(n.truncateToDouble() == n ? 0 : 2);
   }
+
+  // void _handleRadioValueChange2(int value) {
+  //   setState(() {
+  //     _radioValue2 = value;
+  //   });
+  // }
 }
